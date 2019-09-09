@@ -10,8 +10,20 @@ const startingPoint = () => {
         lienzo.closePath();
     }
 
-    const keyPressed = (e) => {
-        const lineColor = 'magenta';
+    const trazado = (e)=>{
+        let xpos = e.offsetX;
+        let ypos = e.offsetY;
+        const pixeles = 10;
+
+        drawLine('blue', 2, xpos + pixeles, ypos + pixeles, xpos - pixeles, ypos -pixeles);
+    }
+
+    const detenerDibujo = ()=>{
+        canvasElement.removeEventListener('mousemove', trazado, false);
+    }
+
+    const dibujarConTeclado = (e) => {
+        const lineColor = 'black';
         const desplazamiento = 10; 
         const anchoDeLinea = 3;
 
@@ -35,35 +47,28 @@ const startingPoint = () => {
 
         }        
     }
-    
-    // const detectarMouse = (e) =>{
-    //     alert('FUNCIONA CARAJO!');
-    // }
+
+    const dibujarConMouse = (e)=>{
+        if (e.buttons === 1) {
+            canvasElement.addEventListener('mousemove', trazado, false);
+            canvasElement.addEventListener('mouseup', detenerDibujo, false);
+        }
+    }
+  
 
     let canvasElement = document.getElementById('drawing_area');
     lienzo = canvasElement.getContext('2d');
-    document.addEventListener('keydown', keyPressed, false);
-    // document.addEventListener('mousedown', detectarMouse , false);
+    document.addEventListener('keyup', dibujarConTeclado, false);
+    canvasElement.addEventListener('mousedown', dibujarConMouse, false);
 
-    let x =0;
-    let y =0;
+    let x =250;
+    let y =250;
 
     let teclas = {
         up:38,
         down:40,
         left:37,
         right:39
-    };
-
-    
-    
-    
-    
-
-
-    
+    };    
 }
-window.addEventListener('load', startingPoint, false);
-
-
-        
+window.addEventListener('load', startingPoint, false);        
