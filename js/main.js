@@ -12,12 +12,10 @@ const startingPoint = () => {
 
     const trazado = (e)=>{
         let xpos = e.offsetX;
-        let ypos = e.offsetY;
-        const pixeles = 10;
-
-        drawLine('blue', 2, xpos + pixeles, ypos + pixeles, xpos - pixeles, ypos -pixeles);
+        let ypos = e.offsetY;         
+        drawLine('red', 3, xpos - e.movementX, ypos - e.movementY, xpos, ypos);
+      
     }
-
     const detenerDibujo = ()=>{
         canvasElement.removeEventListener('mousemove', trazado, false);
     }
