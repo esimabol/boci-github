@@ -10,20 +10,43 @@ const startingPoint = () => {
         lienzo.closePath();
     }
     
-    const colorLinea = () => 'green';
+    const colorLinea = () => {
+        let paletaColores = document.querySelector('#colores').value;
+        return paletaColores;
+    }
 
-    const trazado = (e)=>{
+    const borrador = ()=>{ //PENDIENTE POR IMPLEMENTAR
+        let borrador = document.querySelector('#colores');
+            borrador ="#FFF";
+            return borrador;
+    }
+    //EMPIEZA DIBUJO CON MOUSE
+    const activarMouse = () => {
+        canvasElement.addEventListener('mousedown', restricciones, false);
+    }
+
+    const restricciones = (e)=>{  
+        if(e.buttons === 1){
+            canvasElement.addEventListener('mousemove', dibujarConMouse, false);
+            canvasElement.addEventListener('mouseup', detenerDibujoConMouse, false);  
+        }      
+              
+    }  
+
+    const dibujarConMouse = (e)=>{
         let xpos = e.offsetX;
-        let ypos = e.offsetY;
-        
-        drawLine(colorLinea(), 3, xpos - e.movementX, ypos - e.movementY, xpos, ypos);
-      
+        let ypos = e.offsetY;        
+        drawLine(colorLinea(), 2, xpos - e.movementX, ypos - e.movementY, xpos, ypos);      
     }
 
-    const detenerDibujo = ()=>{
-        canvasElement.removeEventListener('mousemove', trazado, false);
+    const detenerDibujoConMouse = ()=>{
+        canvasElement.removeEventListener('mousemove', dibujarConMouse, false);
     }
 
+    //EMPIEZA DIBUJO CON TECLADO
+    const activarTeclado = () =>{
+        document.addEventListener('keyup', dibujarConTeclado, false);
+    }
     const dibujarConTeclado = (e) => {        
         const desplazamiento = 10; 
         const anchoDeLinea = 3;
@@ -48,19 +71,10 @@ const startingPoint = () => {
 
         }        
     }
-
-    const dibujarConMouse = ()=>{        
-        canvasElement.addEventListener('mousemove', trazado, false);
-        canvasElement.addEventListener('mouseup', detenerDibujo, false);        
-    }
-  
-    
+    //DECLARACIONES GENERALES
     let canvasElement = document.getElementById('drawing_area');
-    lienzo = canvasElement.getContext('2d');
-    document.addEventListener('keyup', dibujarConTeclado, false);
-    canvasElement.addEventListener('mousedown', dibujarConMouse, false);
-
-        
+    lienzo = canvasElement.getContext('2d');  
+         
    
     let x =250;
     let y =250;
@@ -71,5 +85,9 @@ const startingPoint = () => {
         left:37,
         right:39
     };    
+    let activarDibujoTeclas = document.querySelector('#teclado');
+        activarDibujoTeclas.addEventListener('click', activarTeclado, false);
+    let activarDibujoMouse = document.querySelector('#mouse');
+        activarDibujoMouse.addEventListener('click', activarMouse, false);
 }
 window.addEventListener('load', startingPoint, false);        
