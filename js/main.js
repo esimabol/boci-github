@@ -15,28 +15,34 @@ const startingPoint = () => {
         return paletaColores;
     }
 
+    const grosorLinea = () => controlGrosor.value;
+    
+
     const borrador = ()=>{ //PENDIENTE POR IMPLEMENTAR
         let borrador = document.querySelector('#colores');
-            borrador ="#FFF";
-            return borrador;
+            borrador.value = "#ffffff";
+        return borrador;
     }
     //EMPIEZA DIBUJO CON MOUSE
     const activarMouse = () => {
-        canvasElement.addEventListener('mousedown', restricciones, false);
+        if (activarDibujoMouse.checked === true) {
+            canvasElement.addEventListener('mousedown', restricciones, false);
+        }
+        else {
+            canvasElement.removeEventListener('mousedown', restricciones, false);
+        }        
     }
-
     const restricciones = (e)=>{  
         if(e.buttons === 1){
             canvasElement.addEventListener('mousemove', dibujarConMouse, false);
             canvasElement.addEventListener('mouseup', detenerDibujoConMouse, false);  
-        }      
-              
-    }  
+        }                
+    } 
 
     const dibujarConMouse = (e)=>{
         let xpos = e.offsetX;
         let ypos = e.offsetY;        
-        drawLine(colorLinea(), 2, xpos - e.movementX, ypos - e.movementY, xpos, ypos);      
+        drawLine(colorLinea(), grosorLinea(), xpos - e.movementX, ypos - e.movementY, xpos, ypos);      
     }
 
     const detenerDibujoConMouse = ()=>{
@@ -45,27 +51,32 @@ const startingPoint = () => {
 
     //EMPIEZA DIBUJO CON TECLADO
     const activarTeclado = () =>{
-        document.addEventListener('keyup', dibujarConTeclado, false);
+        if(activarDibujoTeclas.checked === true){
+            document.addEventListener('keyup', dibujarConTeclado, false);
+        }
+        else {
+            document.removeEventListener('keyup', dibujarConTeclado, false);
+        }        
     }
     const dibujarConTeclado = (e) => {        
         const desplazamiento = 10; 
-        const anchoDeLinea = 3;
+        // const anchoDeLinea = 9;
 
         switch(e.keyCode) {
             case teclas.up:
-                drawLine(colorLinea(), anchoDeLinea, x, y, x, y - desplazamiento);
+                drawLine(colorLinea(), grosorLinea(), x, y, x, y - desplazamiento);
                 y = y - desplazamiento
             break;
             case teclas.down:
-                drawLine(colorLinea(), anchoDeLinea, x, y, x, y + desplazamiento);
+                drawLine(colorLinea(), grosorLinea(), x, y, x, y + desplazamiento);
                 y = y + desplazamiento
             break;
             case teclas.right:
-                drawLine(colorLinea(), anchoDeLinea, x, y, x + desplazamiento, y);
+                drawLine(colorLinea(), grosorLinea(), x, y, x + desplazamiento, y);
                 x = x + desplazamiento
             break;
             case teclas.left:
-                drawLine(colorLinea(), anchoDeLinea, x, y, x - desplazamiento, y);
+                drawLine(colorLinea(), grosorLinea(), x, y, x - desplazamiento, y);
                 x = x - desplazamiento
             break;
 
@@ -73,8 +84,7 @@ const startingPoint = () => {
     }
     //DECLARACIONES GENERALES
     let canvasElement = document.getElementById('drawing_area');
-    lienzo = canvasElement.getContext('2d');  
-         
+    lienzo = canvasElement.getContext('2d');           
    
     let x =250;
     let y =250;
@@ -86,8 +96,16 @@ const startingPoint = () => {
         right:39
     };    
     let activarDibujoTeclas = document.querySelector('#teclado');
-        activarDibujoTeclas.addEventListener('click', activarTeclado, false);
+        activarDibujoTeclas.addEventListener('change', activarTeclado, false);
     let activarDibujoMouse = document.querySelector('#mouse');
-        activarDibujoMouse.addEventListener('click', activarMouse, false);
+        activarDibujoMouse.addEventListener('change', activarMouse, false);
+    let borrar = document.querySelector('#borrador');
+        borrar.addEventListener('change', borrador, false);
+    let controlGrosor = document.querySelector('#grosor');
+        controlGrosor.addEventListener('change', grosorLinea, false )
+            
+
+    
+        
 }
 window.addEventListener('load', startingPoint, false);        

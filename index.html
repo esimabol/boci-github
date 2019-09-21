@@ -15,11 +15,24 @@
             <section class="color-pallete">
                 <input type="color" name="paleta-colores" id="colores">
             </section>
-            <section class="thickness">
-                <input type="button" id="teclado" value="teclado">
-                <input type="button" id="mouse" value="mouse">
-                <div class="thick"></div>
-                <div class="eraser"></div>
+            <section>
+                <label class="switch">
+                    <input type="checkbox" id="teclado">
+                    <span class="slider">Teclado</span>
+                </label>                
+                
+                <label class="switch">
+                    <input type="checkbox" id="mouse">
+                    <span class="slider">Mouse</span>
+                </label>
+
+                <label class="switch">
+                    <input type="checkbox" id="borrador">
+                    <span class="slider">Borrador</span>
+                </label>
+
+                <input type="range" id="grosor" step="0.1" min="1" max="9">
+                  
             </section>
         </div>
     </header>
