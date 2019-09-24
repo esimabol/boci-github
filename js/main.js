@@ -1,15 +1,16 @@
 const startingPoint = () => {
     
-    const drawLine = (color,width, xi, yi, xf, yf) => {
+    const drawLine = (color,width, style, xi, yi, xf, yf) => {
         lienzo.beginPath();
         lienzo.strokeStyle =color;
         lienzo.lineWidth = width;
+        lienzo.lineCap = style;
         lienzo.moveTo(xi,yi);
         lienzo.lineTo(xf,yf);
         lienzo.stroke();
         lienzo.closePath();
     }
-    
+ 
     const colorLinea = () => {
         let paletaColores = document.querySelector('#colores').value;
         return paletaColores;
@@ -18,13 +19,19 @@ const startingPoint = () => {
     const grosorLinea = () => controlGrosor.value;
     
 
-    const borrador = ()=>{ //PENDIENTE POR IMPLEMENTAR
+    const borrador = ()=>{ 
         let borrador = document.querySelector('#colores');
+            borrador.style.display = 'none';
+            lienzo.lineCap = 'butt';
             borrador.value = "#ffffff";
-        return borrador;
+            return borrador;
     }
+    const limpiarDibujo = () => lienzo.clearRect(0, 0, 500, 500);
+
     //EMPIEZA DIBUJO CON MOUSE
     const activarMouse = () => {
+        let paletaColores = document.querySelector('#colores');
+            paletaColores.style.display = 'block';
         if (activarDibujoMouse.checked === true) {
             canvasElement.addEventListener('mousedown', restricciones, false);
         }
@@ -42,7 +49,7 @@ const startingPoint = () => {
     const dibujarConMouse = (e)=>{
         let xpos = e.offsetX;
         let ypos = e.offsetY;        
-        drawLine(colorLinea(), grosorLinea(), xpos - e.movementX, ypos - e.movementY, xpos, ypos);      
+        drawLine(colorLinea(), grosorLinea(), 'round', xpos - e.movementX, ypos - e.movementY, xpos, ypos);      
     }
 
     const detenerDibujoConMouse = ()=>{
@@ -60,23 +67,23 @@ const startingPoint = () => {
     }
     const dibujarConTeclado = (e) => {        
         const desplazamiento = 10; 
-        // const anchoDeLinea = 9;
+        
 
         switch(e.keyCode) {
             case teclas.up:
-                drawLine(colorLinea(), grosorLinea(), x, y, x, y - desplazamiento);
+                drawLine(colorLinea(), grosorLinea(), 'butt', x, y, x, y - desplazamiento);
                 y = y - desplazamiento
             break;
             case teclas.down:
-                drawLine(colorLinea(), grosorLinea(), x, y, x, y + desplazamiento);
+                drawLine(colorLinea(), grosorLinea(), 'butt', x, y, x, y + desplazamiento);
                 y = y + desplazamiento
             break;
             case teclas.right:
-                drawLine(colorLinea(), grosorLinea(), x, y, x + desplazamiento, y);
+                drawLine(colorLinea(), grosorLinea(), 'butt', x, y, x + desplazamiento, y);
                 x = x + desplazamiento
             break;
             case teclas.left:
-                drawLine(colorLinea(), grosorLinea(), x, y, x - desplazamiento, y);
+                drawLine(colorLinea(), grosorLinea(), 'butt', x, y, x - desplazamiento, y);
                 x = x - desplazamiento
             break;
 
@@ -102,7 +109,9 @@ const startingPoint = () => {
     let borrar = document.querySelector('#borrador');
         borrar.addEventListener('change', borrador, false);
     let controlGrosor = document.querySelector('#grosor');
-        controlGrosor.addEventListener('change', grosorLinea, false )
+        controlGrosor.addEventListener('change', grosorLinea, false );
+    let borrarDibujo = document.getElementById('borrarTodo');
+        borrarDibujo.addEventListener('click', limpiarDibujo, false);
             
 
     
