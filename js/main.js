@@ -21,8 +21,6 @@ const startingPoint = () => {
 
     const borrador = ()=>{ 
         let borrador = document.querySelector('#colores');
-            borrador.style.display = 'none';
-            lienzo.lineCap = 'butt';
             borrador.value = "#ffffff";
             return borrador;
     }
