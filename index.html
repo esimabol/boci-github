@@ -9,45 +9,20 @@
     <script src="js/main.js"></script>
 </head>
 <body>
-    <header>
-        <div class="container">
+    <div class="container">
+        <header>
             <h1>BOCI</h1>
-            <section class="color-pallete">
-                <input type="color" name="paleta-colores" id="colores">
-            </section>
-            <section>
-                <label class="switch">
-                    <input type="checkbox" id="teclado">
-                    <span class="slider">Teclado</span>
-                </label>                
-                
-                <label class="switch">
-                    <input type="checkbox" id="mouse">
-                    <span class="slider">Mouse</span>
-                </label>
-
-                <label class="switch">
-                    <input type="checkbox" id="borrador">
-                    <span class="slider">Borrador</span>
-                </label>
-
-                <label class="switch">
-                    <input type="button" value="Borrar todo" id="borrarTodo">                    
-                </label>
-
-                <input type="range" id="grosor" step="0.1" min="1" max="9">
-                  
-            </section>
-        </div>
-    </header>
-    <main class="canvas">
-        <canvas width ="500"  height ="500" id="drawing_area"></canvas>
-    </main>
-    <footer>
-        <div class="container">
-            <p><small>Developed by Edylber Simancas &copy; 2019</small></p>
-        </div>
-    </footer>
-    
+            <nav>                
+                <i id="pencil" class="icons">
+                    <img src="img/pencil.svg">
+                </i>                
+            </nav>
+        </header>
+        <main>Canvas</main>
+        <aside>Barra lateral</aside>    
+        <footer>        
+            <p><small>Developed by Edylber Simancas &copy; 2019</small></p>       
+        </footer>
+    </div>
 </body>
 </html>

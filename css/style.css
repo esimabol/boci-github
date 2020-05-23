@@ -8,52 +8,71 @@ html {
     font-size: 16px;
 }
 
-
+body, img {
+    width: 100%;
+}
 .container {
-    max-width: 940px;
-    margin:0 auto;
-}
-
-header {
-    background-color: #666;
-    color: #fff;
-}
-
-
-.left {
-    text-align: left;
-}
-
-header .container{
     display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: center;
+    flex-flow: row wrap;
 }
 
-.color-pallete > div, .thickness > div {
+header  {
+    width:100%;
+    height: 100px;
+    order: 2;
+    border: 1px solid green;
+}
+main {
+    width: 100%;
+    height: 100px;
+    order:1;
+    border: 1px solid blue;
+}
+aside{
+    width: 100%;
+    height: 100px;
+    order:3;
+    border: 1px solid orange;
+}
+footer {
+    width: 100%;
+    height: 100px;
+    border: 1px solid red;
+    order:4;
+}
+
+.icons{
+    display: block;
+    cursor: pointer;
     width: 30px;
     height: 30px;
-    border-radius: 10px;
-    border:1px dashed #fff;
-}
-
-.color-pallete, .thickness {
-    width: 70px;
-    height: 70px;
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
-    align-content: stretch;
 }
 
 
-main {
-    text-align: center;
-}
-canvas {
-    border: 1px solid black;    
+@media(min-width: 768px){
+    header{
+        width: 20%;
+        order:1;
+        
+    }
+    main {
+        width: 60%;
+        order:2;
+        
+    }
+    aside{
+        width:20%;
+        order:3;
+    }
 }
 
+@media(min-width:960px){
+    .container {
+        margin:0 10px;
+    }
+}
+@media(min-width:1120px){
+    .container {
+        margin:0 40px;
+    }
+}
