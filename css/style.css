@@ -8,8 +8,9 @@ html {
     font-size: 16px;
 }
 
-body, img {
+body {
     width: 100%;
+    background-color:hsla(34, 0%, 95%, .5);
 }
 .container {
     display: flex;
@@ -17,28 +18,33 @@ body, img {
 }
 
 header  {
+    text-align:center;
     width:100%;
-    height: 100px;
-    order: 2;
+    order: 1;
     border: 1px solid green;
 }
 main {
     width: 100%;
-    height: 100px;
-    order:1;
+    height: 500px;
+    order:2;
+    background-color:#fff;
     border: 1px solid blue;
 }
 aside{
     width: 100%;
-    height: 100px;
+    height: 70px;
     order:3;
     border: 1px solid orange;
 }
 footer {
     width: 100%;
-    height: 100px;
+    height: auto;
     border: 1px solid red;
     order:4;
+}
+
+footer p {
+    float: right;
 }
 
 .icons{
@@ -48,22 +54,41 @@ footer {
     height: 30px;
 }
 
+input[type="color"] {
+    border-style:none;
+    border-radius: 50%;
+}
 
+.tools{
+    width: inherit;
+    height: 100%;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+    align-content: center;
+}
 @media(min-width: 768px){
     header{
-        width: 20%;
+        width: 10%;
+        height:100vh;
         order:1;
         
     }
     main {
-        width: 60%;
+        width: 80%;
+        height:100vh;
         order:2;
         
     }
     aside{
-        width:20%;
+        width:10%;
+        height:100vh;
         order:3;
     }
+   .tools{
+        flex-flow: column wrap;
+        width: 100%;
+   }
 }
 
 @media(min-width:960px){
